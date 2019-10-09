@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sj-maps",
-    "slug": "sj-maps",
+    "name": "mobile",
+    "slug": "mobile",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
