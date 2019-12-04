@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from '../../assets/usjt_wg.png';
 import api from '../services/api';
 import {KeyboardAvoidingView,
         View,
@@ -6,7 +7,9 @@ import {KeyboardAvoidingView,
         StyleSheet,
         TextInput,
         TouchableOpacity,
-        Text} from 'react-native';
+        Text,
+        AsyncStorage,
+        Picker} from 'react-native';
 
 
 export default function LandingPage({navigation}){
@@ -15,38 +18,39 @@ export default function LandingPage({navigation}){
   const [salaDestino,setSalaDestino] = useState('');
 
   async function handleSubmit() {
-    // const response = await api.get('/API_PATHCALCULATE', {salaAtual},{salaDestino});
-    // const {rota} = response.data;
+    await AsyncStorage.setItem('salaAtual',salaAtual);
+    await AsyncStorage.setItem('salaDestino',salaDestino);
     navigation.navigate('PathFinderPage');
   }
   
   return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        
-       <Text style={styles.textLabel}>Sala atual</Text>
-       <TextInput
-         maxLength={4}
-         style={styles.inputClassroom}
-         placeholder='Atual'
-         autoCapitalize='characters'
-         value={salaAtual}
-         onChangeText={setSalaAtual}
-       />
-       <Text style={styles.textLabel}>Sala destino*</Text>
-       <TextInput
-         maxLength={4}
-         style={styles.inputClassroom}
-         placeholder='Destino'
-         autoCapitalize='characters'
-         value={salaDestino}
-         onChangeTet={setSalaDestino}
-       />
-        <TouchableOpacity 
-        title='Calcular Rota' 
-        style={styles.button} 
-        textAlign={'center'} 
-        onPress={handleSubmit}>
-        <Text style={styles.textCalc}>CALCULAR</Text>
+      <Image source={logo} style={styles.logo}/>
+      <Text style={styles.textLabel}>Sala atual</Text>
+      
+      <TextInput
+        maxLength={4}
+        style={styles.inputClassroom}
+        placeholder='Atual'
+        autoCapitalize='characters'
+        value={salaAtual}
+        onChangeText={setSalaAtual}
+      />
+      <Text style={styles.textLabel}>Sala destino*</Text>
+      <TextInput
+        maxLength={4}
+        style={styles.inputClassroom}
+        placeholder='Destino'
+        autoCapitalize='characters'
+        value={salaDestino}
+        onChangeText={setSalaDestino}
+      />
+      <TouchableOpacity 
+      title='Calcular Rota' 
+      style={styles.button} 
+      textAlign={'center'} 
+      onPress={handleSubmit}>
+      <Text style={styles.textCalc}>CALCULAR</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
@@ -59,6 +63,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#271d6e',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  logo: {
+    marginBottom: 40,
   },
   inputClassroom: {
     width: 80,

@@ -5,8 +5,8 @@ import PathFinderPage from './pages/PathFinderPage';
 
 const Routes = createAppContainer( //o que estiver em primeiro será a página inicial
     createSwitchNavigator({
-      PathFinderPage,
       LandingPage,
+      PathFinderPage,
     })
 );
 
